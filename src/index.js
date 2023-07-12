@@ -1,17 +1,31 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Register from './components/Authentication/Register';
+import WeatherSearch from './components/WeatherSearch';
+import Login from './components/Authentication/Login';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const IndexPage = () => (
+  <div className="index-container">
+    <h1 className="index-title">Weather App</h1>
+    <div className="index-messages">
+      <p>Welcome to the Weather App!</p>
+      <p>Get real-time weather updates for any location.</p>
+      <p>Stay informed and plan your day with ease.</p>
+    </div>
+    <Register />
+  </div>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <Router>
+      <Routes>
+        <Route path="/" element={<IndexPage />} />
+        <Route path="/weather" element={<WeatherSearch />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+  </React.StrictMode>
+);
